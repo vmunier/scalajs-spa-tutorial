@@ -36,7 +36,7 @@
     
 
         
-    <div class="book" data-level="2.1.4" data-basepath="." data-revision="Thu Apr 02 2015 21:43:19 GMT+0300 (FLE Daylight Time)">
+    <div class="book" data-level="2.1.4" data-basepath="." data-revision="Thu Apr 02 2015 22:08:03 GMT+0300 (FLE Daylight Time)">
     
 
 <div class="book-summary">
@@ -514,13 +514,9 @@ the other one is a separate library called <a href="https://github.com/japgolly/
 out and see which one fits your application better. In this tutorial we are using ScalaCSS, as it integrates nicely with scalajs-react.</p>
 <h2 id="defining-global-styles">Defining global styles</h2>
 <p>In our tutorial we are relying on Bootstrap to provide most of the CSS, so the global style definitions are really simple. The original CSS basically
-contains only two definitions and of those the second one is just overriding a Bootstrap style.</p>
+contains only one definition.</p>
 <pre><code class="lang-css"><span class="hljs-tag">body</span> <span class="hljs-rules">{
     <span class="hljs-rule"><span class="hljs-attribute">padding-top</span>:<span class="hljs-value"> <span class="hljs-number">50px</span></span></span>;
-<span class="hljs-rule">}</span></span>
-
-<span class="hljs-class">.label-as-badge</span> <span class="hljs-rules">{
-    <span class="hljs-rule"><span class="hljs-attribute">border-radius</span>:<span class="hljs-value"> <span class="hljs-number">1em</span></span></span>;
 <span class="hljs-rule">}</span></span>
 </code></pre>
 <p>To express this in ScalaCSS we will use the <code>StyleSheet.Inline</code> class.</p>
@@ -530,16 +526,13 @@ contains only two definitions and of those the second one is just overriding a B
   style(unsafeRoot(<span class="hljs-string">&quot;body&quot;</span>)(
     paddingTop(<span class="hljs-number">50.</span>px))
   )
-
-  style(unsafeRoot(<span class="hljs-string">&quot;.label-as-badge&quot;</span>)(
-    borderRadius(<span class="hljs-number">1.</span>em))
-  )
 }
 </code></pre>
+<p>For more extensive examples, please refer to <a href="https://japgolly.github.io/scalacss/book" target="_blank">ScalaCSS documentation</a>.</p>
 <p>Each call to <code>style</code> registers a new style in the internal registry. To actually generate the CSS we need in the HTML page, we have to call</p>
 <pre><code class="lang-scala">  <span class="hljs-type">GlobalStyles</span>.addToDocument()
 </code></pre>
-<p>in our application initialization code. Note that this is <a href="http://japgolly.github.io/scalacss/book/ext/react.html" target="_blank">specific initialization to scalajs-react</a>
+<p>in our application initialization code. Note that this is <a href="https://japgolly.github.io/scalacss/book/ext/react.html" target="_blank">specific initialization to scalajs-react</a>
 and there are other methods for creating and inserting CSS in other situations.</p>
 <h2 id="wrapping-external-css">Wrapping external CSS</h2>
 <p>As most of the styles we use are defined in Bootstrap CSS, we want to access those in a more convenient manner. Especially if at some point we would want
