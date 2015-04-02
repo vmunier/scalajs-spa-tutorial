@@ -1,0 +1,717 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
+        <title>Todo module and data flow | Scala.js SPA-tutorial</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.0.0">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        
+    
+    
+    <link rel="next" href="./autowire-and-upickle.html" />
+    
+    
+    <link rel="prev" href="./integrating-javascript-components.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <link rel="stylesheet" href="gitbook/style.css">
+    
+    
+
+        
+    <div class="book" data-level="2.1.6" data-basepath="." data-revision="Thu Apr 02 2015 21:30:06 GMT+0300 (FLE Daylight Time)">
+    
+
+<div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Type to search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        
+        
+        
+
+        
+
+        
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="./index.html">
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="getting-started.html">
+            
+                
+                    <a href="./getting-started.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        Getting started
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="application-structure.html">
+            
+                
+                    <a href="./application-structure.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        Application structure
+                    </a>
+                
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1" data-path="the-client.html">
+            
+                
+                    <a href="./the-client.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.</b>
+                        
+                        The Client
+                    </a>
+                
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="routing.html">
+            
+                
+                    <a href="./routing.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.1.</b>
+                        
+                        Routing
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="main-menu.html">
+            
+                
+                    <a href="./main-menu.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.2.</b>
+                        
+                        Main menu
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="dashboard.html">
+            
+                
+                    <a href="./dashboard.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.3.</b>
+                        
+                        Dashboard
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" data-path="css-in-scala.html">
+            
+                
+                    <a href="./css-in-scala.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.4.</b>
+                        
+                        CSS in Scala
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.5" data-path="integrating-javascript-components.html">
+            
+                
+                    <a href="./integrating-javascript-components.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.5.</b>
+                        
+                        Integrating JavaScript components
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.1.6" data-path="todo-module-and-data-flow.html">
+            
+                
+                    <a href="./todo-module-and-data-flow.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.6.</b>
+                        
+                        Todo module and data flow
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.7" data-path="autowire-and-upickle.html">
+            
+                
+                    <a href="./autowire-and-upickle.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.7.</b>
+                        
+                        Autowire and uPickle
+                    </a>
+                
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="server-side.html">
+            
+                
+                    <a href="./server-side.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.2.</b>
+                        
+                        Server side
+                    </a>
+                
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="testing.html">
+            
+                
+                    <a href="./testing.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        Testing
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4" data-path="debugging.html">
+            
+                
+                    <a href="./debugging.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        Debugging
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="logging.html">
+            
+                
+                    <a href="./logging.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        Logging
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6" data-path="sbt-build-definition.html">
+            
+                
+                    <a href="./sbt-build-definition.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        SBT build definition
+                    </a>
+                
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.1" data-path="serving-compiled-js-from-both-projects.html">
+            
+                
+                    <a href="./serving-compiled-js-from-both-projects.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.1.</b>
+                        
+                        Serving compiled JS from both projects
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="sharing-web-resources-between-js-and-jvm-projects.html">
+            
+                
+                    <a href="./sharing-web-resources-between-js-and-jvm-projects.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.2.</b>
+                        
+                        Sharing web resources between JS and JVM projects
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="using-resources-from-webjars.html">
+            
+                
+                    <a href="./using-resources-from-webjars.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.3.</b>
+                        
+                        Using resources from WebJars
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="running-the-server-in-a-separate-jvm.html">
+            
+                
+                    <a href="./running-the-server-in-a-separate-jvm.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.4.</b>
+                        
+                        Running the server in a separate JVM
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.5" data-path="production-build.html">
+            
+                
+                    <a href="./production-build.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.5.</b>
+                        
+                        Production build
+                    </a>
+                
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7" data-path="faq.html">
+            
+                
+                    <a href="./faq.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.</b>
+                        
+                        FAQ
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8" data-path="what-next.html">
+            
+                
+                    <a href="./what-next.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.</b>
+                        
+                        What next?
+                    </a>
+                
+            
+            
+        </li>
+    
+
+
+        
+        <li class="divider"></li>
+        <li>
+            <a href="https://www.gitbook.com" target="blank" class="gitbook-link">Published with GitBook</a>
+        </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header">
+    <!-- Actions Left -->
+    <a href="#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">Share on Twitter</button>
+                <button type="button" data-sharing="google-plus" class="button">Share on Google</button>
+                <button type="button" data-sharing="facebook" class="button">Share on Facebook</button>
+                <button type="button" data-sharing="weibo" class="button">Share on Weibo</button>
+                <button type="button" data-sharing="instapaper" class="button">Share on Instapaper</button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="./" >Scala.js SPA-tutorial</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="todo-module-and-data-flow">Todo module and data flow</h1>
+<p>The Todo module and its React component are a bit more interesting than Dashboard as they provide some interaction. The module contains a <code>TodoList</code>
+component, displaying a list of Todo items retrieved from the server. User can then click the checkbox next to the item to indicate if that item
+is completed or not. Internally the state of Todo items is maintained by the <code>Todo</code> module and <code>TodoList</code> just passively displays them.</p>
+<p>Before going into the details of the actual Todo module and related components, let&apos;s ponder a while about data flow in a Scala.js React application.</p>
+<h2 id="unidirectional-data-flow">Unidirectional data flow</h2>
+<p>Several JS frameworks out there (for example AngularJS) use mutable state and two-way data binding. In this tutorial, however, we are taking
+cues from Facebook&apos;s <a href="https://github.com/facebook/flux" target="_blank">Flux</a>, which is an architecture for unidirectional data flow and immutable state. 
+This architecture works especially well in more complex applications, where two-way data binding can quickly lead to all kinds of hard issues. 
+It&apos;s also a relatively simple concept, so it works well even in a simple tutorial application like this. Below you can see a diagram of the
+Flux architecture.</p>
+<p><img src="http://facebook.github.io/flux/img/flux-simple-f8-diagram-with-client-action-1300w.png" alt="Flux architecture"></p>
+<p>It consists of a Dispatcher that takes in <em>Actions</em>, and dispatches them to all <em>Stores</em> that then inform
+<em>Views</em> to update themselves with the new data. This kind of message dispatching sounds quite familiar if you&apos;ve used actor frameworks
+like <a href="http://akka.io" target="_blank">Akka</a> before, so we might as well call those parts with a bit different names.</p>
+<p><img src="images/dispatcher-actor.png?raw=true" alt="Actor architecture"></p>
+<p>It&apos;s not a real actor framework, for example the dispatcher sends all messages to all registered actors, but it&apos;s close enough for our
+purposes. To explain how this works in practice, let&apos;s look at the concrete examples in the Todo module.</p>
+<h2 id="modifying-a-todo-state">Modifying a Todo state</h2>
+<p>The <code>TodoList</code> component renders a checkbox for each Todo, which can be used to mark the Todo as <em>completed</em>.</p>
+<pre><code class="lang-scala">&lt;.input(^.tpe := <span class="hljs-string">&quot;checkbox&quot;</span>, ^.checked := item.completed, ^.onChange --&gt; <span class="hljs-type">P</span>.stateChange(item.copy(completed = !item.completed))),
+</code></pre>
+<p>Clicking the checkbox calls the <code>stateChange</code> method, which maps to <code>updateTodo</code> method in <code>TodoActions</code> object. The <code>TodoActions</code> is a
+collection of functions to communicate with the server about changes to the todo list.</p>
+<pre><code class="lang-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">TodoActions</span> {</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">updateTodo</span>(</span>item: <span class="hljs-type">TodoItem</span>) = {
+    <span class="hljs-comment">// inform the server to update/add the item</span>
+    <span class="hljs-type">AjaxClient</span>[<span class="hljs-type">Api</span>].updateTodo(item).call().foreach { todos =&gt;
+      <span class="hljs-type">MainDispatcher</span>.dispatch(<span class="hljs-type">UpdateAllTodos</span>(todos))
+    }
+  }
+</code></pre>
+<p>Note that nothing really happens on the client side as a result of clicking the checkbox. All it does is tell the server that the state
+of completion has changed on the selected Todo. Only after the call to the server returns with an updated list of todos, is the client updated.
+The update happens indirectly by sending an <code>UpdateAllTodos</code> message to the <code>MainDispatcher</code>. This message is then dispatched to all registered
+actors, which in this case means only the <code>TodoStore</code>.</p>
+<pre><code class="lang-scala"><span class="hljs-comment">// refine a reactive variable</span>
+<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">val</span> <span class="hljs-title">items</span> =</span> <span class="hljs-type">Var</span>(<span class="hljs-type">Seq</span>.empty[<span class="hljs-type">TodoItem</span>])
+
+<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">updateItems</span>(</span>newItems: <span class="hljs-type">Seq</span>[<span class="hljs-type">TodoItem</span>]): <span class="hljs-type">Unit</span> = {
+  <span class="hljs-comment">// check if todos have really changed</span>
+  <span class="hljs-keyword">if</span> (newItems != items()) {
+    <span class="hljs-comment">// use Rx to update, which propagates down to dependencies</span>
+    items() = newItems
+  }
+}
+
+<span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">receive</span> =</span> {
+  <span class="hljs-keyword">case</span> <span class="hljs-type">UpdateAllTodos</span>(todos) =&gt;
+    updateItems(todos)
+</code></pre>
+<p><code>TodoStore</code> updates its internal state with the new items (only if there is a real change) and this change is propagated using 
+<a href="https://github.com/lihaoyi/scala.rx" target="_blank">ScalaRx</a> to all interested parties. As it happens, there are
+actually two separate components observing changes in the <code>TodoStore</code>. One is the Todo module where we started:</p>
+<pre><code class="lang-scala"><span class="hljs-comment">// get todos from the Rx defined in props</span>
+<span class="hljs-type">TodoList</span>(<span class="hljs-type">TodoListProps</span>(<span class="hljs-type">P</span>.todos(), <span class="hljs-type">TodoActions</span>.updateTodo, item =&gt; <span class="hljs-type">B</span>.editTodo(<span class="hljs-type">Some</span>(item)), <span class="hljs-type">B</span>.deleteTodo))
+</code></pre>
+<p>It forces an update on the component, which in turn causes a call to <code>render</code> to refresh the view. Within the view, the new todos are fetched from
+<code>TodoStore</code> using a reactive variable (<code>Rx</code>). This change cascades down to <code>TodoList</code> and to the individual Todo that was originally clicked. 
+Mission accomplished!</p>
+<p>But as we mentioned before, there was another component interested in changes to the Todos. This is the main menu item for Todo, which shows
+the number of open Todos.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">val</span> <span class="hljs-title">todoCount</span> =</span> props.todos().count(!_.completed)
+<span class="hljs-type">Seq</span>(
+  &lt;.span(<span class="hljs-string">&quot;Todo &quot;</span>),
+  <span class="hljs-keyword">if</span> (todoCount &gt; <span class="hljs-number">0</span>) &lt;.span(bss.labelOpt(<span class="hljs-type">CommonStyle</span>.danger), bss.labelAsBadge, todoCount) <span class="hljs-keyword">else</span> &lt;.span()
+)
+</code></pre>
+<p>This is the beauty of unidirectional data flow, where the components do not need to know where the change came from, or who might be
+interested in the change. All state changes are propagated to interested parties automatically.</p>
+<p>Next, let&apos;s look how to set up everything for data to flow.</p>
+<h2 id="wiring">Wiring</h2>
+<p><img src="images/control-flow.png?raw=true" alt="Wiring"></p>
+<p>As you can see in the diagram above, there&apos;s all kinds of control flow activity going on in the application. Relevant classes are:</p>
+<p><strong>MainDispatcher</strong></p>
+<ul>
+<li>Singleton instance of <code>Dispatcher</code> that everything is using</li>
+</ul>
+<p><strong>TodoStore</strong></p>
+<ul>
+<li>A store implementing both <code>Actor</code> for receiving messages from <code>Dispatcher</code>. Provides reactive variables (<code>Rx</code>) to propagate changes.</li>
+</ul>
+<p><strong>TodoActions</strong></p>
+<ul>
+<li>Helper class to make Ajax calls to the server and initiate updates via the dispatcher</li>
+</ul>
+<p><code>TodoStore</code> registers itself with the <code>MainDispatcher</code> in its singleton constructor.</p>
+<pre><code class="lang-scala"><span class="hljs-type">MainDispatcher</span>.register(<span class="hljs-keyword">this</span>)
+</code></pre>
+<p>The <code>Todo</code> module and <code>MainMenu</code> register themselves, when they are mounted, as observers to changes in <code>TodoStore</code> items. 
+They also initiate a refresh request for the todos.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mounted</span>(</span>): <span class="hljs-type">Unit</span> = {
+  <span class="hljs-comment">// hook up to TodoStore changes</span>
+  <span class="hljs-function"><span class="hljs-keyword">val</span> <span class="hljs-title">obsTodos</span> =</span> t.props.todos.foreach { _ =&gt; t.forceUpdate() }
+  onUnmount {
+    <span class="hljs-comment">// stop observing when unmounted</span>
+    obsTodos.kill()
+  }
+  <span class="hljs-comment">// dispatch a message to refresh the todos, which will cause TodoStore to fetch todos from the server</span>
+  <span class="hljs-type">MainDispatcher</span>.dispatch(<span class="hljs-type">RefreshTodos</span>)
+}
+</code></pre>
+<p>The <code>foreach</code> call returns an <code>Obs</code> which we can use to observe changes. Whenever <code>todos</code> change, the function body is executed, forcing an update on
+the React component. The actual value of <code>todos</code> is not used here, but within the view definition.</p>
+<p>Note the use of <a href="https://github.com/japgolly/scalajs-react/tree/master/extra#onunmount" target="_blank">onUnmount</a> to automatically remove the observer
+when the component is unmounted.</p>
+<p>Another, cleaner way to do the same is to use an observer pattern.</p>
+<pre><code class="lang-scala"><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RxObserver</span>[</span><span class="hljs-type">BS</span> &lt;: <span class="hljs-type">BackendScope</span>[_,_]](scope: <span class="hljs-type">BS</span>) <span class="hljs-keyword">extends</span> <span class="hljs-type">OnUnmount</span> {
+  <span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">observe</span>[</span><span class="hljs-type">T</span>](rx:<span class="hljs-type">Rx</span>[<span class="hljs-type">T</span>]): <span class="hljs-type">Unit</span> = {
+    <span class="hljs-function"><span class="hljs-keyword">val</span> <span class="hljs-title">obs</span> =</span> rx.foreach( _ =&gt; scope.forceUpdate() )
+    <span class="hljs-comment">// stop observing when unmounted</span>
+    onUnmount(obs.kill())
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Backend</span>(</span>t: <span class="hljs-type">BackendScope</span>[<span class="hljs-type">Props</span>, <span class="hljs-type">State</span>]) <span class="hljs-keyword">extends</span> <span class="hljs-type">RxObserver</span>(t) {
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mounted</span>(</span>): <span class="hljs-type">Unit</span> = {
+    <span class="hljs-comment">// hook up to TodoStore changes</span>
+    observe(t.props.todos)
+  }
+</code></pre>
+<p>This does the same thing as before but a bit more elegantly. The <code>RxObserver</code> trait is independent and can be used for all Backend classes that
+have dependencies on reactive variables.</p>
+<p>Finally views hook up different callbacks to <code>TodoActions</code> when something happens to the todos.</p>
+<h2 id="editing-todos">Editing todos</h2>
+<p>For adding new Todo items, the user interface provides a button and a modal dialog box (using the <code>Modal</code> component described earlier). Editing
+an existing item is performed by clicking an <em>Edit</em> button next to the todo description. Both actions open the same dialog. Finally you can also
+delete a todo by clicking the <em>Delete</em> button.</p>
+<p><code>TodoForm</code> is a simple React component built around a <code>Modal</code> which allows users to edit an existing Todo item, or create a new one 
+(there is no difference between these two from the component&apos;s point of view). It looks like this</p>
+<p><img src="images/dialogbox.png?raw=true" alt="Dialog box"></p>
+<p>The dialog gets an optional item in properties and maintains current item in its state. The <code>submitHandler</code> callback is used to inform the parent
+when the dialog box is closed (or cancelled).</p>
+<pre><code class="lang-scala"><span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Props</span>(</span>item: <span class="hljs-type">Option</span>[<span class="hljs-type">TodoItem</span>], submitHandler: (<span class="hljs-type">TodoItem</span>, <span class="hljs-type">Boolean</span>) =&gt; <span class="hljs-type">Unit</span>)
+
+<span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">State</span>(</span>item: <span class="hljs-type">TodoItem</span>, cancelled: <span class="hljs-type">Boolean</span> = <span class="hljs-literal">true</span>)
+</code></pre>
+<p>Building the component looks a bit complicated, so let&apos;s walk through it.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">val</span> <span class="hljs-title">component</span> =</span> <span class="hljs-type">ReactComponentB</span>[<span class="hljs-type">Props</span>](<span class="hljs-string">&quot;TodoForm&quot;</span>)
+  .initialStateP(p =&gt; <span class="hljs-type">State</span>(p.item.getOrElse(<span class="hljs-type">TodoItem</span>(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-type">TodoNormal</span>, <span class="hljs-literal">false</span>))))
+  .backend(<span class="hljs-keyword">new</span> <span class="hljs-type">Backend</span>(_))
+  .render((<span class="hljs-type">P</span>, <span class="hljs-type">S</span>, <span class="hljs-type">B</span>) =&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">val</span> <span class="hljs-title">headerText</span> =</span> <span class="hljs-keyword">if</span> (<span class="hljs-type">S</span>.item.id == <span class="hljs-string">&quot;&quot;</span>) <span class="hljs-string">&quot;Add new todo&quot;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;Edit todo&quot;</span>
+    <span class="hljs-type">Modal</span>(<span class="hljs-type">Modal</span>.<span class="hljs-type">Props</span>(
+      <span class="hljs-comment">// header contains a cancel button (X)</span>
+      header = be =&gt; &lt;.span(&lt;.button(^.tpe := <span class="hljs-string">&quot;button&quot;</span>, bss.close, ^.onClick --&gt; be.hide(), <span class="hljs-type">Icon</span>.close), &lt;.h4(headerText)),
+      <span class="hljs-comment">// footer has the OK button that submits the form before hiding it</span>
+      footer = be =&gt; &lt;.span(<span class="hljs-type">Button</span>(<span class="hljs-type">Button</span>.<span class="hljs-type">Props</span>(() =&gt; {<span class="hljs-type">B</span>.submitForm(); be.hide()}), <span class="hljs-string">&quot;OK&quot;</span>)),
+      <span class="hljs-comment">// this is called after the modal has been hidden (animation is completed)</span>
+      closed = <span class="hljs-type">B</span>.formClosed),
+      &lt;.div(bss.formGroup,
+        &lt;.label(^.`<span class="hljs-keyword">for</span>` := <span class="hljs-string">&quot;description&quot;</span>, <span class="hljs-string">&quot;Description&quot;</span>),
+        &lt;.input(^.tpe := <span class="hljs-string">&quot;text&quot;</span>, bss.formControl, ^.id := <span class="hljs-string">&quot;description&quot;</span>, ^.value := <span class="hljs-type">S</span>.item.content,
+          ^.placeholder := <span class="hljs-string">&quot;write description&quot;</span>, ^.onChange ==&gt; <span class="hljs-type">B</span>.updateDescription)),
+      &lt;.div(bss.formGroup,
+        &lt;.label(^.`<span class="hljs-keyword">for</span>` := <span class="hljs-string">&quot;priority&quot;</span>, <span class="hljs-string">&quot;Priority&quot;</span>),
+        <span class="hljs-comment">// using defaultValue = &quot;Normal&quot; instead of option/selected due to React</span>
+        &lt;.select(bss.formControl, ^.id := <span class="hljs-string">&quot;priority&quot;</span>, ^.value := <span class="hljs-type">S</span>.item.priority.toString, ^.onChange ==&gt; <span class="hljs-type">B</span>.updatePriority,
+          &lt;.option(^.value := <span class="hljs-type">TodoHigh</span>.toString, <span class="hljs-string">&quot;High&quot;</span>),
+          &lt;.option(^.value := <span class="hljs-type">TodoNormal</span>.toString, <span class="hljs-string">&quot;Normal&quot;</span>),
+          &lt;.option(^.value := <span class="hljs-type">TodoLow</span>.toString, <span class="hljs-string">&quot;Low&quot;</span>)
+        )
+      )
+    )
+  }).build
+</code></pre>
+<p>State is first initialized with the provided item or with a new empty item. Within the <code>render</code> method a new <code>Modal</code> is created and in the properties we assign
+couple of button controls. Note how both <code>header</code> and <code>footer</code> are actually functions that are given the <code>Modal</code>&apos;s <code>Backend</code> so that they can call the <code>hide()</code>
+function. In the OK button the state is first updated to <em>not cancelled</em>.</p>
+<p>The form itself is quite straightforward, with handlers to update internal state as fields change. Note that with React the <code>select</code> element works a bit
+differently from regular HTML5 and you must use <code>value</code> property to select the option instead of the typical <code>selected</code> attribute.</p>
+<p>When the form closes, the parent&apos;s <code>submitHandler</code> gets called with the item and a flag indicating if the dialog box was cancelled.</p>
+<pre><code class="lang-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">formClosed</span>(</span>): <span class="hljs-type">Unit</span> = {
+  <span class="hljs-comment">// call parent handler with the new item and whether form was OK or cancelled</span>
+  t.props.submitHandler(t.state.item, t.state.cancelled)
+}
+</code></pre>
+<p>But now it&apos;s time to get to the bottom of client-server communications!</p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="./integrating-javascript-components.html" class="navigation navigation-prev " aria-label="Previous page: Integrating JavaScript components"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="./autowire-and-upickle.html" class="navigation navigation-next " aria-label="Next page: Autowire and uPickle"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="gitbook/app.js"></script>
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>
