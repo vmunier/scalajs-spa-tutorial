@@ -36,7 +36,7 @@
     
 
         
-    <div class="book" data-level="2.1.7" data-basepath="." data-revision="Thu Apr 02 2015 22:08:03 GMT+0300 (FLE Daylight Time)">
+    <div class="book" data-level="2.1.7" data-basepath="." data-revision="Fri Apr 03 2015 13:52:28 GMT+0300 (FLE Daylight Time)">
     
 
 <div class="book-summary">
@@ -519,7 +519,8 @@ server side.</p>
   <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">doCall</span>(</span>req: <span class="hljs-type">Request</span>): <span class="hljs-type">Future</span>[<span class="hljs-type">String</span>] = {
     dom.extensions.<span class="hljs-type">Ajax</span>.post(
       url = <span class="hljs-string">&quot;/api/&quot;</span> + req.path.mkString(<span class="hljs-string">&quot;/&quot;</span>),
-      data = upickle.write(req.args)
+      data = upickle.write(req.args),
+      headers = <span class="hljs-type">Map</span>(<span class="hljs-string">&quot;Content-Type&quot;</span> -&gt; <span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>)
     ).map(_.responseText)
   }
 

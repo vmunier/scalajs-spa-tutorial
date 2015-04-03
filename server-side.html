@@ -36,7 +36,7 @@
     
 
         
-    <div class="book" data-level="2.2" data-basepath="." data-revision="Thu Apr 02 2015 22:08:03 GMT+0300 (FLE Daylight Time)">
+    <div class="book" data-level="2.2" data-basepath="." data-revision="Fri Apr 03 2015 13:52:28 GMT+0300 (FLE Daylight Time)">
     
 
 <div class="book-summary">
@@ -522,12 +522,13 @@ for the client side. Routing logic on the server side is defined using Spray DSL
   } ~ post {
     path(<span class="hljs-string">&quot;api&quot;</span> / <span class="hljs-type">Segments</span>) { s =&gt;
       extract(_.request.entity.asString) { e =&gt;
-        complete {
+        ctx =&gt;
           <span class="hljs-comment">// handle API requests via autowire</span>
-          <span class="hljs-type">Router</span>.route[<span class="hljs-type">Api</span>](apiService)(
+          <span class="hljs-function"><span class="hljs-keyword">val</span> <span class="hljs-title">result</span> =</span> <span class="hljs-type">Router</span>.route[<span class="hljs-type">Api</span>](apiService)(
             autowire.<span class="hljs-type">Core</span>.<span class="hljs-type">Request</span>(s, upickle.read[<span class="hljs-type">Map</span>[<span class="hljs-type">String</span>, <span class="hljs-type">String</span>]](e))
           )
-        }
+          <span class="hljs-comment">// force the use of application/json content type</span>
+          result.map(json =&gt; ctx.complete(<span class="hljs-type">HttpEntity</span>(<span class="hljs-type">ContentTypes</span>.`application/json`, json)))
       }
     }
   }
