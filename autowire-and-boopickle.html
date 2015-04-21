@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Autowire and uPickle | Scala.js SPA-tutorial</title>
+        <title>Autowire and BooPickle | Scala.js SPA-tutorial</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.0.0">
@@ -36,7 +36,7 @@
     
 
         
-    <div class="book" data-level="2.1.7" data-basepath="." data-revision="Fri Apr 03 2015 13:52:28 GMT+0300 (FLE Daylight Time)">
+    <div class="book" data-level="2.1.7" data-basepath="." data-revision="Tue Apr 21 2015 20:49:17 GMT+0300 (FLE Daylight Time)">
     
 
 <div class="book-summary">
@@ -203,15 +203,15 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.1.7" data-path="autowire-and-upickle.html">
+        <li class="chapter active" data-level="2.1.7" data-path="autowire-and-boopickle.html">
             
                 
-                    <a href="./autowire-and-upickle.html">
+                    <a href="./autowire-and-boopickle.html">
                         <i class="fa fa-check"></i>
                         
                             <b>2.1.7.</b>
                         
-                        Autowire and uPickle
+                        Autowire and BooPickle
                     </a>
                 
             
@@ -505,36 +505,45 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="autowire-and-upickle">Autowire and uPickle</h1>
+                        <h1 id="autowire-and-boopickle">Autowire and BooPickle</h1>
 <p>Web clients communicate with the server most commonly with <em>Ajax</em> which is quite loosely defined collection of techniques. Most notable
 JavaScript libraries like JQuery provide higher level access to the low level protocols exposed by the browser. Scala.js provides a nice
 Ajax wrapper in <code>dom.extensions.Ajax</code> (or <code>dom.ext.Ajax</code> in scalajs-dom 0.8+) but it&apos;s still quite tedious to serialize/deserialize objects
 and take care of all the dirty little details.</p>
 <p>But fear not, there is no need to do all that yourself as our friend <a href="https://github.com/lihaoyi" target="_blank">Li Haoyi (lihaoyi)</a> has created and
-published two great libraries called <a href="https://github.com/lihaoyi/upickle" target="_blank">uPickle</a> and <a href="https://github.com/lihaoyi/autowire" target="_blank">Autowire</a>.</p>
+published a great library called <a href="https://github.com/lihaoyi/autowire" target="_blank">Autowire</a>. Combined with the author&apos;s very own 
+<a href="https://github.com/ochrons/boopickle" target="_blank">BooPickle</a> library you can easily handle client-server communication. Note that BooPickle uses
+binary serialization format, so if you&apos;d prefer a JSON format, consider using <a href="https://github.com/lihaoyi/upickle" target="_blank">uPickle</a>. As SPA tutorial
+used to use uPickle for serialization, you can browse the repository history to see the relevant code 
+<a href="https://github.com/ochrons/scalajs-spa-tutorial/blob/628bf9308aaebe7f3d0527007ef604801988ef42/js/src/main/scala/spatutorial/client/services/AjaxClient.scala" target="_blank">here</a>
+and <a href="https://github.com/ochrons/scalajs-spa-tutorial/blob/628bf9308aaebe7f3d0527007ef604801988ef42/jvm/src/main/scala/spatutorial/server/MainApp.scala" target="_blank">here</a>.</p>
 <p>To build your own client-server communication pathway all you need to do is to define a single object on the client side and another on the
 server side.</p>
-<pre><code class="lang-scala"><span class="hljs-comment">// client side</span>
-<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">AjaxClient</span> <span class="hljs-keyword"><span class="hljs-keyword">extends</span></span> <span class="hljs-title">autowire</span>.<span class="hljs-title">Client</span>[</span><span class="hljs-type">String</span>, upickle.<span class="hljs-type">Reader</span>, upickle.<span class="hljs-type">Writer</span>]{
-  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">doCall</span>(</span>req: <span class="hljs-type">Request</span>): <span class="hljs-type">Future</span>[<span class="hljs-type">String</span>] = {
-    dom.extensions.<span class="hljs-type">Ajax</span>.post(
-      url = <span class="hljs-string">&quot;/api/&quot;</span> + req.path.mkString(<span class="hljs-string">&quot;/&quot;</span>),
-      data = upickle.write(req.args),
-      headers = <span class="hljs-type">Map</span>(<span class="hljs-string">&quot;Content-Type&quot;</span> -&gt; <span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>)
-    ).map(_.responseText)
+<pre><code class="lang-scala"><span class="hljs-keyword">import</span> boopickle._
+
+<span class="hljs-comment">// client side</span>
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">AjaxClient</span> <span class="hljs-keyword"><span class="hljs-keyword">extends</span></span> <span class="hljs-title">autowire</span>.<span class="hljs-title">Client</span>[</span><span class="hljs-type">ByteBuffer</span>, <span class="hljs-type">Unpickler</span>, <span class="hljs-type">Pickler</span>] {
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">doCall</span>(</span>req: <span class="hljs-type">Request</span>): <span class="hljs-type">Future</span>[<span class="hljs-type">ByteBuffer</span>] = {
+    post(url = <span class="hljs-string">&quot;/api/&quot;</span> + req.path.mkString(<span class="hljs-string">&quot;/&quot;</span>),
+      data = <span class="hljs-type">Pickle</span>.intoBytes(req.args),
+      responseType = <span class="hljs-string">&quot;arraybuffer&quot;</span>,
+      headers = <span class="hljs-type">Map</span>(<span class="hljs-string">&quot;Content-Type&quot;</span> -&gt; <span class="hljs-string">&quot;application/octet-stream&quot;</span>)
+    ).map(r =&gt; <span class="hljs-type">TypedArrayBuffer</span>.wrap(r.response.asInstanceOf[<span class="hljs-type">ArrayBuffer</span>]))
   }
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read</span>[</span><span class="hljs-type">Result</span>: upickle.<span class="hljs-type">Reader</span>](p: <span class="hljs-type">String</span>) = upickle.read[<span class="hljs-type">Result</span>](p)
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write</span>[</span><span class="hljs-type">Result</span>: upickle.<span class="hljs-type">Writer</span>](r: <span class="hljs-type">Result</span>) = upickle.write(r)
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read</span>[</span><span class="hljs-type">Result</span>: <span class="hljs-type">Unpickler</span>](p: <span class="hljs-type">ByteBuffer</span>) = <span class="hljs-type">Unpickle</span>[<span class="hljs-type">Result</span>].fromBytes(p)
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write</span>[</span><span class="hljs-type">Result</span>: <span class="hljs-type">Pickler</span>](r: <span class="hljs-type">Result</span>) = <span class="hljs-type">Pickle</span>.intoBytes(r)
 }
 </code></pre>
 <p>The only variable specific to your application is the URL you want to use to call the server. Otherwise everything else it automatically
-generated for you through the magic of macros. The server side is even simpler, just letting Autowire know that you want to use uPickle
+generated for you through the magic of macros. The server side is even simpler, just letting Autowire know that you want to use BooPickle
 for serialization.</p>
-<pre><code class="lang-scala"><span class="hljs-comment">// server side</span>
-<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Router</span> <span class="hljs-keyword"><span class="hljs-keyword">extends</span></span> <span class="hljs-title">autowire</span>.<span class="hljs-title">Server</span>[</span><span class="hljs-type">String</span>, upickle.<span class="hljs-type">Reader</span>, upickle.<span class="hljs-type">Writer</span>]{
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read</span>[</span><span class="hljs-type">Result</span>: upickle.<span class="hljs-type">Reader</span>](p: <span class="hljs-type">String</span>) = upickle.read[<span class="hljs-type">Result</span>](p)
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write</span>[</span><span class="hljs-type">Result</span>: upickle.<span class="hljs-type">Writer</span>](r: <span class="hljs-type">Result</span>) = upickle.write(r)
+<pre><code class="lang-scala"><span class="hljs-keyword">import</span> boopickle._
+
+<span class="hljs-comment">// server side</span>
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Router</span> <span class="hljs-keyword"><span class="hljs-keyword">extends</span></span> <span class="hljs-title">autowire</span>.<span class="hljs-title">Server</span>[</span><span class="hljs-type">ByteBuffer</span>, <span class="hljs-type">Unpickler</span>, <span class="hljs-type">Pickler</span>] {
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read</span>[</span><span class="hljs-type">Result</span>: <span class="hljs-type">Unpickler</span>](p: <span class="hljs-type">ByteBuffer</span>) = <span class="hljs-type">Unpickle</span>[<span class="hljs-type">Result</span>].fromBytes(p)
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write</span>[</span><span class="hljs-type">Result</span>: <span class="hljs-type">Pickler</span>](r: <span class="hljs-type">Result</span>) = <span class="hljs-type">Pickle</span>.intoBytes(r)
 }
 </code></pre>
 <p>Now that you have the <code>AjaxClient</code> set up, calling server is as simple as</p>
@@ -558,8 +567,8 @@ for serialization.</p>
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">updateTodo</span>(</span>item:<span class="hljs-type">TodoItem</span>)
 }
 </code></pre>
-<p>Please check out uPickle documentation on what it can and cannot serialize. You might need to use something else if your data is complicated.
-Case classes, base collections and basic data types are a safe bet.</p>
+<p>Please check out <a href="https://github.com/ochrons/boopickle" target="_blank">BooPickle documentation</a> on what it can and cannot serialize. You might need to use 
+something else if your data is complicated. Case classes, base collections and basic data types are a safe bet.</p>
 <p>So how does this work on the server side?</p>
 
                     

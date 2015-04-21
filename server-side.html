@@ -23,7 +23,7 @@
     <link rel="next" href="./testing.html" />
     
     
-    <link rel="prev" href="./autowire-and-upickle.html" />
+    <link rel="prev" href="./autowire-and-boopickle.html" />
     
 
         
@@ -36,7 +36,7 @@
     
 
         
-    <div class="book" data-level="2.2" data-basepath="." data-revision="Fri Apr 03 2015 13:52:28 GMT+0300 (FLE Daylight Time)">
+    <div class="book" data-level="2.2" data-basepath="." data-revision="Tue Apr 21 2015 20:49:17 GMT+0300 (FLE Daylight Time)">
     
 
 <div class="book-summary">
@@ -203,15 +203,15 @@
             
         </li>
     
-        <li class="chapter " data-level="2.1.7" data-path="autowire-and-upickle.html">
+        <li class="chapter " data-level="2.1.7" data-path="autowire-and-boopickle.html">
             
                 
-                    <a href="./autowire-and-upickle.html">
+                    <a href="./autowire-and-boopickle.html">
                         <i class="fa fa-check"></i>
                         
                             <b>2.1.7.</b>
                         
-                        Autowire and uPickle
+                        Autowire and BooPickle
                     </a>
                 
             
@@ -521,14 +521,13 @@ for the client side. Routing logic on the server side is defined using Spray DSL
       getFromResourceDirectory(<span class="hljs-string">&quot;web&quot;</span>)
   } ~ post {
     path(<span class="hljs-string">&quot;api&quot;</span> / <span class="hljs-type">Segments</span>) { s =&gt;
-      extract(_.request.entity.asString) { e =&gt;
+      extract(_.request.entity.data) { requestData =&gt;
         ctx =&gt;
           <span class="hljs-comment">// handle API requests via autowire</span>
           <span class="hljs-function"><span class="hljs-keyword">val</span> <span class="hljs-title">result</span> =</span> <span class="hljs-type">Router</span>.route[<span class="hljs-type">Api</span>](apiService)(
-            autowire.<span class="hljs-type">Core</span>.<span class="hljs-type">Request</span>(s, upickle.read[<span class="hljs-type">Map</span>[<span class="hljs-type">String</span>, <span class="hljs-type">String</span>]](e))
+            autowire.<span class="hljs-type">Core</span>.<span class="hljs-type">Request</span>(s, <span class="hljs-type">Unpickle</span>[<span class="hljs-type">Map</span>[<span class="hljs-type">String</span>, <span class="hljs-type">ByteBuffer</span>]].fromBytes(requestData.toByteString.asByteBuffer))
           )
-          <span class="hljs-comment">// force the use of application/json content type</span>
-          result.map(json =&gt; ctx.complete(<span class="hljs-type">HttpEntity</span>(<span class="hljs-type">ContentTypes</span>.`application/json`, json)))
+          result.map(responseData =&gt; ctx.complete(<span class="hljs-type">HttpEntity</span>(<span class="hljs-type">HttpData</span>(<span class="hljs-type">ByteString</span>(responseData)))))
       }
     }
   }
@@ -536,7 +535,8 @@ for the client side. Routing logic on the server side is defined using Spray DSL
 </code></pre>
 <p>The main HTML page and related resources are provided directly from the project resources directory (coming from the <code>shared</code> sub-project, actually).
 The interesting part is handling <code>api</code> requests using Autowire router. Like on the client side, Autowire takes care of the complicated stuff
-so you just need to plug it in and let it do its magic. The <code>ApiService</code> is just a normal class and it doesn&apos;t need to concern itself with
+so you just need to plug it in and let it do its magic. Boopickle takes care of deserializing the request and serializing the response into binary. </p>
+<p>The <code>ApiService</code> is just a normal class and it doesn&apos;t need to concern itself with
 serialization or URL request path mappings. It just implements the same <code>Api</code> as it used on the client side. Simple, eh!</p>
 <pre><code class="lang-scala"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApiService</span> <span class="hljs-keyword"><span class="hljs-keyword">extends</span></span> <span class="hljs-title">Api</span> {</span>
   <span class="hljs-keyword">var</span> todos = <span class="hljs-type">Seq</span>(
@@ -579,7 +579,7 @@ serialization or URL request path mappings. It just implements the same <code>Ap
         </div>
 
         
-        <a href="./autowire-and-upickle.html" class="navigation navigation-prev " aria-label="Previous page: Autowire and uPickle"><i class="fa fa-angle-left"></i></a>
+        <a href="./autowire-and-boopickle.html" class="navigation navigation-prev " aria-label="Previous page: Autowire and BooPickle"><i class="fa fa-angle-left"></i></a>
         
         
         <a href="./testing.html" class="navigation navigation-next " aria-label="Next page: Testing"><i class="fa fa-angle-right"></i></a>
