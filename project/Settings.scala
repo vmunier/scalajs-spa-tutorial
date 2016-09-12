@@ -37,7 +37,7 @@ object Settings {
     val bootstrap = "3.3.6"
     val chartjs = "2.1.3"
 
-    val playScripts = "0.5.0"
+    val scalajsScripts = "1.0.0"
   }
 
   /**
@@ -51,7 +51,7 @@ object Settings {
 
   /** Dependencies only used by the JVM project */
   val jvmDependencies = Def.setting(Seq(
-    "com.vmunier" %% "play-scalajs-scripts" % versions.playScripts,
+    "com.vmunier" %% "scalajs-scripts" % versions.scalajsScripts,
     "org.webjars" % "font-awesome" % "4.3.0-1" % Provided,
     "org.webjars" % "bootstrap" % versions.bootstrap % Provided,
     "com.lihaoyi" %% "utest" % versions.uTest % Test

@@ -4,7 +4,7 @@ import java.nio.ByteBuffer
 
 import boopickle.Default._
 import com.google.inject.Inject
-import play.api.{Configuration, Environment}
+import play.api.Configuration
 import play.api.mvc._
 import services.ApiService
 import spatutorial.shared.Api
@@ -16,7 +16,7 @@ object Router extends autowire.Server[ByteBuffer, Pickler, Pickler] {
   override def write[R: Pickler](r: R) = Pickle.intoBytes(r)
 }
 
-class Application @Inject() (implicit val config: Configuration, env: Environment) extends Controller {
+class Application @Inject() (implicit val config: Configuration) extends Controller {
   val apiService = new ApiService()
 
   def index = Action {

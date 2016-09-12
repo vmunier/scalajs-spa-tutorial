@@ -1,5 +1,4 @@
 import sbt.Keys._
-import sbt.Project.projectToRef
 
 // a special crossProject for configuring a JS/JVM/shared structure
 lazy val shared = (crossProject.crossType(CrossType.Pure) in file("shared"))
@@ -8,7 +7,7 @@ lazy val shared = (crossProject.crossType(CrossType.Pure) in file("shared"))
     libraryDependencies ++= Settings.sharedDependencies.value
   )
   // set up settings specific to the JS project
-  .jsConfigure(_ enablePlugins ScalaJSPlay)
+  .jsConfigure(_ enablePlugins ScalaJSWeb)
 
 lazy val sharedJVM = shared.jvm.settings(name := "sharedJVM")
 
@@ -39,11 +38,8 @@ lazy val client: Project = (project in file("client"))
     // use uTest framework for tests
     testFrameworks += new TestFramework("utest.runner.Framework")
   )
-  .enablePlugins(ScalaJSPlugin, ScalaJSPlay)
+  .enablePlugins(ScalaJSPlugin, ScalaJSWeb)
   .dependsOn(sharedJS)
-
-// Client projects (just one in this case)
-lazy val clients = Seq(client)
 
 // instantiate the JVM project for SBT with some additional settings
 lazy val server = (project in file("server"))
@@ -55,14 +51,16 @@ lazy val server = (project in file("server"))
     libraryDependencies ++= Settings.jvmDependencies.value,
     commands += ReleaseCmd,
     // connect to the client project
-    scalaJSProjects := clients,
-    pipelineStages := Seq(scalaJSProd, digest, gzip),
+    scalaJSProjects := Seq(client),
+    pipelineStages in Assets := Seq(scalaJSPipeline),
+    pipelineStages := Seq(digest, gzip),
+    // trigger scalaJSPipeline when using compile or continuous compilation
+    compile in Compile <<= (compile in Compile) dependsOn scalaJSPipeline,
     // compress CSS
     LessKeys.compress in Assets := true
   )
   .enablePlugins(PlayScala)
   .disablePlugins(PlayLayoutPlugin) // use the standard directory layout instead of Play's custom
-  .aggregate(clients.map(projectToRef): _*)
   .dependsOn(sharedJVM)
 
 // Command for building a release
